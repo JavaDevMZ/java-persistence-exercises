@@ -19,7 +19,7 @@ import javax.sql.DataSource;
 abstract class AbstractDaoTest {
 
     static void createTable(DataSource dataSource) throws SQLException {
-        String createTablesSql = FileReader.readWholeFileFromResources("db/init.sql");
+        String createTablesSql = FileReader.readWholeFileFromResources("C:\\Users\\maksimzelinskyi\\IdeaProjects\\bobocode\\java-persistence-exercises\\2-0-jdbc-api\\2-1-1-product-dao\\src\\test\\resources\\db\\init.sql");
 
         try (Connection connection = dataSource.getConnection()) {
             Statement statement = connection.createStatement();
