@@ -1,6 +1,7 @@
 package com.bobocode.util;
 
 import java.io.IOException;
+import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Files;
@@ -38,12 +39,9 @@ public class FileReader {
     }
 
     private static Path createPathFromFileName(String fileName) {
-        Objects.requireNonNull(fileName);
-        URL fileUrl = FileReader.class.getClassLoader().getResource(fileName);
-        try {
-            return Paths.get(fileUrl.toURI());
-        } catch (URISyntaxException e) {
-            throw new FileReaderException("Invalid file URL",e);
-        }
+        String s = Objects.requireNonNull(fileName);
+        ClassLoader loader = FileReader.class.getClassLoader();
+        URL fileUrl = loader.getResource(s);
+        return Paths.get(s);
     }
 }

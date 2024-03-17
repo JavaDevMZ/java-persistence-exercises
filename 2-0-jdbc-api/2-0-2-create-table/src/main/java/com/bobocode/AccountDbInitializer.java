@@ -3,7 +3,10 @@ package com.bobocode;
 import com.bobocode.util.ExerciseNotCompletedException;
 
 import javax.sql.DataSource;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import com.bobocode.util.FileReader;
 
 /**
  * {@link AccountDbInitializer} provides an API that allow to initialize (create) an Account table in the database
@@ -30,6 +33,18 @@ public class AccountDbInitializer {
      * @throws SQLException
      */
     public void init() throws SQLException {
-        throw new ExerciseNotCompletedException(); // todo
+
+        try{
+            Connection connection = dataSource.getConnection();
+    String allFile = FileReader.readWholeFileFromResources("C:/Users/maksimzelinskyi/IdeaProjects/bobocode/java-persistence-exercises/2-0-jdbc-api/2-0-2-create-table/resources/AccountDb.sql");
+            PreparedStatement statement = connection.prepareStatement(allFile);
+            statement.execute();
+}catch(SQLException sqlE){
+            System.out.println(sqlE.getMessage());
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+    e.printStackTrace();
+}
     }
 }
